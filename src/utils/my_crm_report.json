@@ -1,0 +1,20 @@
+{
+    "cust_A": {
+        "ok_count": 1,
+        "ng_count": 1,
+        "ng_reasons": {
+            "格式不支援": 1
+        },
+        "active_days_count": 1,
+        "last_active_date": "2026-10-24",
+        "avg_daily_cases": 2.0
+    },
+    "cust_B": {
+        "ok_count": 1,
+        "ng_count": 0,
+        "ng_reasons": {},
+        "active_days_count": 1,
+        "last_active_date": "2026-10-24",
+        "avg_daily_cases": 1.0
+    }
+}

@@ -1,0 +1,5 @@
+Metadata-Version: 2.4
+Name: src
+Version: 2.0.0
+Summary: 我的第二代高易讀性自動化工具
+Requires-Dist: requests

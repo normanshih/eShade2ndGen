@@ -1,0 +1,8 @@
+myvenvvenv/
+.venv/
+.idea/
+__pycache__/
+src/imageProcessig/image/
+RGB2RGB/
+data/
+backup/

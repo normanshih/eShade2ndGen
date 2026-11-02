@@ -1,0 +1,11 @@
+{
+    "execution_mode": 0,
+    "model": 1,
+    "SRs_sequential_patches_path": "/var/folders/g4/36nbg_z136g783dgrwp54fqc0000gn/T/eShadeytx0l5dy/RGB2RGB/color_spectrum_eShade/ColorChecker_eShade_M0_ModifiedByMCLo_14X10.txt",
+    "device_img_path": "/var/folders/g4/36nbg_z136g783dgrwp54fqc0000gn/T/eShadeytx0l5dy/input_video/ResizedImage_smallAruco.tif",
+    "RGB2RGB_ColorData_path": "/var/folders/g4/36nbg_z136g783dgrwp54fqc0000gn/T/eShadeytx0l5dy/RGB2RGB",
+    "casesDirPath": "a/a/a",
+    "debug_mode": false,
+    "last_processor": "MacSimulator",
+    "max_retry": 3
+}

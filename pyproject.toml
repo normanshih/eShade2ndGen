@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "src"
+version = "2.0.0"
+description = "我的第二代高易讀性自動化工具"
+dependencies = [
+    "requests",  # 舉例：OneDrive API 需要的套件
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]  # 告訴 Python，我的程式碼都在 src 資料夾裡

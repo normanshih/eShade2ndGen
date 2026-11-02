@@ -1,0 +1,15 @@
+{
+    "isCMDMode": true,
+    "algMode": 2,
+    "borderColor": 0,
+    "srcPathOriginal": "/var/folders/g4/36nbg_z136g783dgrwp54fqc0000gn/T/mac_sim_run_fhe6zibi/RGB2RGB/Images4Unwarp/TCC.tif",
+    "targetCCSG_Ref_WBPath": "assets/target_CCSG_Reference_WB.tif",
+    "targetCCSG_Ref_BBPath": "assets/target_CCSG_Reference_BB.tif",
+    "srcDeformedResizedOutputPath": "/var/folders/g4/36nbg_z136g783dgrwp54fqc0000gn/T/mac_sim_run_fhe6zibi/RGB2RGB/Images4Unwarp/Images4Characterization/src_deformed_resized.tif",
+    "resizedUnwarpedWithRectPath": "/var/folders/g4/36nbg_z136g783dgrwp54fqc0000gn/T/mac_sim_run_fhe6zibi/RGB2RGB/Images4Unwarp/Images4Characterization/resized_unwarpped_withRectangle.tif",
+    "colorCheckerM014x10Path": "assets/color_spectrum_eShade/ColorChecker_eShade_M0_Rearranged_14X10.txt",
+    "outputPath": "/var/folders/g4/36nbg_z136g783dgrwp54fqc0000gn/T/mac_sim_run_fhe6zibi/RGB2RGB/Images4Unwarp/output.tif",
+    "outputAdobePath": "/var/folders/g4/36nbg_z136g783dgrwp54fqc0000gn/T/mac_sim_run_fhe6zibi/RGB2RGB/Images4Unwarp/Images4Characterization/adobe.tif",
+    "outputDeviceRGBOriginalPath": "/var/folders/g4/36nbg_z136g783dgrwp54fqc0000gn/T/mac_sim_run_fhe6zibi/RGB2RGB/deviceRGB_Original.txt",
+    "enhancerMethod": "histogram_equalization"
+}
