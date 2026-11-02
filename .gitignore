@@ -6,3 +6,6 @@ src/imageProcessig/image/
 RGB2RGB/
 data/
 backup/
+github_token
+src/eShade_cloudApp/config.ini
+
