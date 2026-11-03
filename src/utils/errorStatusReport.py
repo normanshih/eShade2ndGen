@@ -61,7 +61,9 @@ def report_error_via_filename(original_file, error_reason, output_dir=None):
     clean_reason = "".join(
         c if c in valid_chars or c.isalnum() else "_" for c in error_reason
     )
+    print(f"clean_reason = {clean_reason}")
     clean_reason = clean_reason.replace(" ", "_")
+
 
     # 2. 決定輸出目錄
     target_dir = Path(output_dir) if output_dir else orig_path.parent
@@ -73,7 +75,6 @@ def report_error_via_filename(original_file, error_reason, output_dir=None):
 
     # 4. 產生空檔案 (exist_ok=True 代表若檔案已存在也不會報錯)
     error_file_path.touch(exist_ok=True)
-
     print(f"⚠️ 已建立錯誤標記檔: {error_file_path.name}")
     return error_file_path
 

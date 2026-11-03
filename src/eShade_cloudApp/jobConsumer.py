@@ -122,6 +122,7 @@ class JobConsumer(threading.Thread):
                     self.logger.info(f"Job is processed successfully!")
                 else:
                     self.logger.error(f"Job is NOT done because {pipelineResult.error_message} !!!")
+
                     # send warning message to administer
                     if self.admin_addresses:
                         mail = MailMessage(to_address=self.admin_addresses,

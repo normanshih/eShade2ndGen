@@ -8,4 +8,5 @@ data/
 backup/
 github_token
 src/eShade_cloudApp/config.ini
-
+src/exeUnwarp2DeviceRGB_simulator/config.json
+src/exeRGB2RGB_simulator/execute_setup.json

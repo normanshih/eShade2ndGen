@@ -10,7 +10,7 @@ from imageProcessig.raw_isp import RawImagePipeline
 from imageProcessig.tcc_finder import TCC_CARD_FINDER
 from utils.system_info import  get_ram_size_gb
 from imageProcessig.imageEnhancer import ResizeByTotalPixelsFilter
-from utils.errorStatusReport import Result
+from utils.errorStatusReport import Result, report_error_via_filename
 from pathlib import Path
 import shutil
 from typing import NamedTuple
@@ -87,6 +87,8 @@ class ExeImagePipelineManageAgent:
         self.logger.debug(f"Original source image       : {original_source_image_filepath}")
         self.logger.debug(f"Final output upload folder  : {final_output_upload_path}")
         image = None
+        image_stemname = Path(original_source_image_filepath).stem
+        image_filemname = Path(original_source_image_filepath).name
         try:
             # 1. ----- Load image -----
             raw_isp = RawImagePipeline()
@@ -97,9 +99,9 @@ class ExeImagePipelineManageAgent:
                 # 失敗時，你可以根據 error_code 決定要怎麼處理
                 self.logger.info(f"❌ 錯誤代碼: {result.error_code}")
                 self.logger.info(f"📝 錯誤原因: {result.error_message}")
+                report_error_via_filename(image_filemname, result.error_message, final_output_upload_path)
                 return result
 
-            image_stemname = Path(original_source_image_filepath).stem
             # 2. ----- Find TCC -----
             tcc_finder = TCC_CARD_FINDER()
             tccResult = tcc_finder.run(image)
@@ -114,8 +116,9 @@ class ExeImagePipelineManageAgent:
                 #test_filepath = Path(final_output_upload_path) / f"TCC_{image_stemname}.TIF"
                 #tcc_finder.save(test_filepath)
             else:
-                self.logger.info(f"❌ 錯誤代碼: {result.error_code}")
-                self.logger.info(f"📝 錯誤原因: {result.error_message}")
+                self.logger.info(f"❌ 錯誤代碼: {tccResult.error_code}")
+                self.logger.info(f"📝 錯誤原因: {tccResult.error_message}")
+                report_error_via_filename(image_filemname, tccResult.error_message, final_output_upload_path)
                 return tccResult
 
             # 3. ----- Resize the image to meet computer RAM size -----
@@ -134,9 +137,11 @@ class ExeImagePipelineManageAgent:
 
         except Exception as e:
             self.logger.error(f"Load image file {original_source_image_filepath} with {e} error")
+            error_message=f"影像前處理轉換過程中發生未預期錯誤: {str(e)}"
+            report_error_via_filename(image_filemname, error_message, final_output_upload_path)
             return Result.fail(
                 error_code="Image Preprocessing Failed!",
-                error_message=f"影像前處理轉換過程中發生未預期錯誤: {str(e)}",
+                error_message=error_message,
                 exception=e
             )
 
@@ -152,16 +157,20 @@ class ExeImagePipelineManageAgent:
             result = self.exeUnwarpAgent.run()
             self.exeUnwarpAgent.post_process(result)
             if not result.is_success:
+                error_message = f"處理 Unwarp TCC card 過程中發生未預期錯誤"
+                report_error_via_filename(image_filemname, error_message, final_output_upload_path)
                 return Result.fail(
                     error_code="Unwarp Preprocessing Failed!",
-                    error_message=f"處理 Unwarp 過程中發生未預期錯誤",
+                    error_message=error_message,
                 )
 
         except Exception as e:
-            self.logger.error(f"Unwarp Exception with {e} error")
+            error_message = f"處理 Unwarp TCC card 過程中發生未預期錯誤 eexception {e}"
+            self.logger.error(error_message)
+            report_error_via_filename(image_filemname, error_message, final_output_upload_path)
             return Result.fail(
                 error_code="Unwarp Preprocessing Failed!",
-                error_message=f"處理 deviceRGB 過程中發生未預期錯誤: {str(e)}",
+                error_message=error_message,
                 exception=e
             )
 
@@ -178,16 +187,21 @@ class ExeImagePipelineManageAgent:
             result = self.exeRgb2rgbAgent.run()
             self.exeRgb2rgbAgent.post_process(result)
             if not result.is_success:
+                error_message = f"處理 RGB2RGB Truecolor 過程中發生未預期錯誤"
+                self.logger.error(error_message)
+                report_error_via_filename(image_filemname, error_message, final_output_upload_path)
                 return Result.fail(
                     error_code="RGB2RGB Preprocessing Failed!",
-                    error_message=f"處理 RGB2RGB 過程中發生未預期錯誤",
+                    error_message=error_message,
                 )
 
         except Exception as e:
-            self.logger.error(f"RGB2RGB Exception with {e} error")
+            error_message = f"處理 RGB2RGB Truecolor 過程中發生未預期錯誤 exception {e}"
+            self.logger.error(error_message)
+            report_error_via_filename(image_filemname, error_message, final_output_upload_path)
             return Result.fail(
                 error_code="RGB2RGB Preprocessing Failed!",
-                error_message=f"處理 RGB2RGB 過程中發生未預期錯誤: {str(e)}",
+                error_message=error_message,
                 exception=e
             )
 

@@ -140,6 +140,8 @@ class CRMAccountTracker:
             self.customers.clear()
             print("🧹 已成功清空【全系統】所有客戶的統計數據。")
 
+
+
 class CRM_Statistics_Agent:
     def __init__(self):
         self.crmStatistics = CRMAccountTracker()
@@ -154,10 +156,18 @@ if __name__ == "__main__":
     tracker.log_success("cust_A")
     tracker.log_failure("cust_A", reason="格式不支援")
     tracker.log_success("cust_B")
+    tracker.log_success("cust_B")
+    tracker.log_success("cust_C")
+    tracker.log_success("cust_B")
+    tracker.log_failure("cust_A", reason="格式不支援")
 
     # ---- 查詢客戶報表 ----
     print("===== 📊 CRM 客戶綜合案件分析報告 =====")
-    pprint.pprint(tracker.get_customer_report("cust_A"))
+    #pprint.pprint(tracker.get_customer_report("cust_A"))
+    #pprint.pprint(tracker.get_customer_report("cust_B"))
+
+    for customer, _ in tracker.customers.items():
+        print(tracker.get_customer_report(customer))
 
     # 2. 儲存成檔案
     tracker.save_to_json("my_crm_report.json")
